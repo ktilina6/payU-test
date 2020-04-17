@@ -1,24 +1,46 @@
   <script language="JavaScript" type="text/javascript" src="https://js.paymentsos.com/v2/latest/secure-fields.min.js"></script>
   <script>POS.setPublicKey("99346d84-5186-4221-9c16-dc51a8de27fb");
   </script>
-  <form id="payment-form">
-    <input type="text" id="cardholder-name" placeholder="John Doe" />
-      <div id="card-secure-fields">
-        <input type="text" id="idnumber" placeholder="ID Number" />
-        <input type="text" id="idtype" placeholder="Passport, Driver's License, CC, CE" />
-        <div id="card-secure-fields">
-      </div>
-      <button type=”submit”>Pay</button>
-  </form>
- <script>
-    POS.setEnvironment("test");
-    POS.initSecureFields('card-secure-fields');
-    document.getElementById('payment-form').addEventListener('submit', function(event) {
-      event.preventDefault();
-      const additionalData = {
-        holder_name: document.getElementById('cardholder-name').value // This field is mandatory
-      }
-      POS.createToken(additionalData, function(result) {
-      });
-    });
-  </script>
+  <script>
+    {
+      "token_type": "credit_card",
+      "holder_name": "string",
+      "expiration_date": "string",
+      "identity_document": {
+        "type": "string",
+        "number": "123456789"
+    },
+  "card_number": "string",
+  "shipping_address": {
+    "country": "USA",
+    "state": "TX",
+    "city": "Greenville",
+    "line1": "10705 Old Mill Rd",
+    "line2": "11605 Young Mill Rd",
+    "zip_code": "75402-3435",
+    "title": "Dr.",
+    "first_name": "John",
+    "last_name": "Travolta",
+    "phone": 13301303330,
+    "email": "john.travolta@johntravolta.com"
+  },
+  "billing_address": {
+    "country": "USA",
+    "state": "TX",
+    "city": "Greenville",
+    "line1": "10705 Old Mill Rd",
+    "line2": "11605 Young Mill Rd",
+    "zip_code": "75402-3435",
+    "title": "Dr.",
+    "first_name": "John",
+    "last_name": "Travolta",
+    "phone": 13301303330,
+    "email": "john.travolta@johntravolta.com"
+  },
+  "additional_details": {
+    "property1": "string",
+    "property2": "string"
+  },
+  "credit_card_cvv": null
+}
+</script>
