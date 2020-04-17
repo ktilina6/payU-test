@@ -1,10 +1,6 @@
-<body>
   <script language="JavaScript" type="text/javascript" src="https://js.paymentsos.com/v2/latest/secure-fields.min.js"></script>
   <script>POS.setPublicKey("99346d84-5186-4221-9c16-dc51a8de27fb");
   </script>
-</body>
-<body>
- <script>
   <form id="payment-form">
     <input type="text" id="cardholder-name" placeholder="John Doe" />
       <div id="card-secure-fields">
@@ -14,7 +10,6 @@
       </div>
       <button type=”submit”>Pay</button>
   </form>
- </script>
  <script>
     POS.setEnvironment("test");
     POS.initSecureFields('card-secure-fields');
@@ -27,4 +22,3 @@
       });
     });
   </script>
-</body>
