@@ -1,24 +1,45 @@
-  <script language="JavaScript" type="text/javascript" src="https://js.paymentsos.com/v2/latest/secure-fields.min.js"></script>
-  <script>POS.setPublicKey("99346d84-5186-4221-9c16-dc51a8de27fb");
+<html>
+<script language="JavaScript" type="text/javascript" src="https://js.paymentsos.com/v2/latest/secure-fields.min.js"></script>
+  <script>POS.setPublicKey("1df2bcb0-3b78-46c9-bba1-001ea65c8857");
   </script>
-  <form id="payment-form">
+  <body>
+    <form id="payment-form">
     <input type="text" id="cardholder-name" placeholder="John Doe" />
-      <div id="card-secure-fields">
-        <input type="text" id="idnumber" placeholder="ID Number" />
-        <input type="text" id="idtype" placeholder="Passport, Driver's License, CC, CE" />
-        <div id="card-secure-fields">
-      </div>
-      <button type=”submit”>Pay</button>
+    <div id="card-secure-fields">
+      <!-- The payment form will be displayed here -->
+    </div>
+    <button type=”submit”>Pay</button>
   </form>
- <script>
+
+  <!-- After embedding the form, set your environment, initialize the form's fields
+   and send the data to PaymentsOS when the form is submitted -->
+  <script>
+
+    // Set your environment. Values are either "test" or "live".
+    // If omitted, the test environment will be used.
     POS.setEnvironment("test");
+
+    // Initialize the form's fields
     POS.initSecureFields('card-secure-fields');
+
+    // Attach a click event to the form that is invoked when the
+    // form is submitted. On submit, pass the card information to
+    // PaymentsOS and receive the token representing the card
+    // information in your site.
     document.getElementById('payment-form').addEventListener('submit', function(event) {
       event.preventDefault();
       const additionalData = {
         holder_name: document.getElementById('cardholder-name').value // This field is mandatory
       }
+      console.log(additionalData)
       POS.createToken(additionalData, function(result) {
+        console.log("cata"+result)
+
+        // Grab the token here
+
       });
     });
   </script>
+</body>
+</html>
+
