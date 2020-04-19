@@ -7,7 +7,7 @@
   <body>
     <form id="payment-form" class="form-inline">
       <div class="form-group">
-        <label for="formGroupExampleInput"><b>Card's Name</label>
+        <label for="formGroupExampleInput"><b>Card-holder Name</label>
         <input type="text" class="form-control" id="cardholder-name" placeholder="Name Surname">
       </div>
       <div class="form-group">
@@ -20,11 +20,11 @@
       </div>  
       <div class="form-group">
         <label for="formGroupExampleInput"><b>Credir Card Details</label>
+        <div id="card-secure-fields"></div>
       </div>
-    <div id="card-secure-fields">
-    </div>
     <button type=”submit”>Pay</button>
   </form>
+  <div id="error"></div>
   <script>
     POS.setEnvironment("test");
     POS.initSecureFields('card-secure-fields');
@@ -37,7 +37,6 @@
     POS.createToken(additionalData, function(result) {
 
         var cosa = jQuery.parseJSON( result );
-        console.log(cosa);
         $("#error").html('');
         if (cosa.category) {
           $("#error" ).append( "<p> Description: "+cosa.description +"</p>");
@@ -51,4 +50,3 @@
   </script>
 </body>
 </html> 
-      
