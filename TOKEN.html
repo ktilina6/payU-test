@@ -1,4 +1,4 @@
-<html>
+   <html>
 <script language="JavaScript" type="text/javascript" src="https://js.paymentsos.com/v2/latest/secure-fields.min.js"></script>
   <script>POS.setPublicKey("1df2bcb0-3b78-46c9-bba1-001ea65c8857");
   </script>
@@ -27,6 +27,7 @@
   <div id="error"></div>
   <script>
     POS.setEnvironment("test");
+    POS.disableSecurityNumber();
     POS.initSecureFields('card-secure-fields');
            
        document.getElementById('payment-form').addEventListener('submit', function(event) {
