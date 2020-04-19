@@ -1,6 +1,11 @@
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<html>
+<script language="JavaScript" type="text/javascript" src="https://js.paymentsos.com/v2/latest/secure-fields.min.js"></script>
+  <script>POS.setPublicKey("1df2bcb0-3b78-46c9-bba1-001ea65c8857");
+  </script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <body>
-    <form id="payment-form">
+    <form id="payment-form" class="form-inline">
       <div class="form-group">
         <label for="formGroupExampleInput"><b>Card's Name</label>
         <input type="text" class="form-control" id="cardholder-name" placeholder="Name Surname">
@@ -12,7 +17,7 @@
         <input type="text" class="form-control" id="country" placeholder="Country">
         <input type="text" class="form-control" id="phone" placeholder="Phone">
         <input type="text" class="form-control" id="email" placeholder="E-mail">
-      </div>
+      </div>  
       <div class="form-group">
         <label for="formGroupExampleInput"><b>Credir Card Details</label>
       </div>
@@ -20,4 +25,30 @@
     </div>
     <button type=”submit”>Pay</button>
   </form>
+  <script>
+    POS.setEnvironment("test");
+    POS.initSecureFields('card-secure-fields');
+           
+       document.getElementById('payment-form').addEventListener('submit', function(event) {
+      event.preventDefault();
+      const additionalData = {
+        holder_name: document.getElementById('cardholder-name').value // This field is mandatory 
+      }
+    POS.createToken(additionalData, function(result) {
 
+        var cosa = jQuery.parseJSON( result );
+        console.log(cosa);
+        $("#error").html('');
+        if (cosa.category) {
+          $("#error" ).append( "<p> Description: "+cosa.description +"</p>");
+          $("#error" ).append( "<p>Error description: "+cosa.more_info +"</p>");
+        } else if (cosa.token)  {
+          $("#error" ).append( "<p>Your token is: <b>"+cosa.token +"</b></p>");
+        }
+
+      });
+    });
+  </script>
+</body>
+</html> 
+      
